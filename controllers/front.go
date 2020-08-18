@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+// RegisterControllers is exported 
 func RegisterControllers() {
 
 	uc := newUserController()
