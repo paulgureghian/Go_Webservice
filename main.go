@@ -1,14 +1,14 @@
 package main
 
 import (
-"net/http"
+	"net/http"
 
-"github.com/paulgureghian/Go_Webservice/controllers"
+	"github.com/paulgureghian/Go_Webservice/controllers"
 )
 
 func main() {
 
-controllers.RegisterControllers()
-http.ListenAndServe(":3000", nil)
+	controllers.RegisterControllers()
+	http.ListenAndServe(":3000", nil)
 
 }
