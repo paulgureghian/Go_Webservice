@@ -18,7 +18,7 @@ func (uc userController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path == "/users" {
 		switch r.Method {
 		case http.MethodGet:
-			uc.getAll(w, r)
+	  		uc.getAll(w, r)
 
 		case http.MethodPost:
 			uc.post(w, r)
@@ -53,13 +53,13 @@ func (uc userController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (uc, *userController) getAll(w http.ResponseWriter, r *http.Request) {
+func (uc *userController) getAll(w http.ResponseWriter, r *http.Request) {
 
 	encodeResponseAsJSON(models.GetUsers(), w)
 
 }
 
-func (u, *userController) get(id int, w http.ResponseWriter) {
+func (uc *userController) get(id int, w http.ResponseWriter) {
 
 	u, err := models.GetUserByID(id)
 	if err != nil {
@@ -81,13 +81,13 @@ func (uc *userController) post(w http.ResponseWriter, r *http.Request) {
 	u, err = models.AddUser(u)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.WriteHeader([]byte(err.Error()))
+		w.Write([]byte(err.Error()))
 		return
 	}
 	encodeResponseAsJSON(u, w)
 }
 
-func (uc, *userController) put(id int, w http.ResponseWriter, r *http.Request) {
+func (uc *userController) put(id int, w http.ResponseWriter, r *http.Request) {
 	u, err := uc.parseRequest(r)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
