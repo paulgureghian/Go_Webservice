@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// User struct is exported
 type User struct {
 	ID        int
 	FirstName string
@@ -16,11 +17,13 @@ var (
 	nextID = 1
 )
 
+// GetUsers is exported
 func GetUsers() []*User {
 
 	return users
 }
 
+// AddUser is exported
 func AddUser(u User) (User, error) {
 
 	if u.ID != 0 {
@@ -34,6 +37,7 @@ func AddUser(u User) (User, error) {
 	return u, nil
 }
 
+// GetUserByID is exported
 func GetUserByID(id int) (User, error) {
 
 	for _, u := range users {
@@ -47,6 +51,7 @@ func GetUserByID(id int) (User, error) {
 
 }
 
+// UpdateUser is exported
 func UpdateUser(u User) (User, error) {
 	for i, candidate := range users {
 		if candidate.ID == u.ID {
@@ -59,6 +64,7 @@ func UpdateUser(u User) (User, error) {
 
 }
 
+// RemoveUserByID is exported
 func RemoveUserByID(id int) error {
 
 	for i, u := range users {
