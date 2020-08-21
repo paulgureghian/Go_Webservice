@@ -15,7 +15,7 @@ type userController struct {
 
 func (uc userController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
-	w.Write([]byte("Welcome to Paul's Go webservice"))
+	w.Write([]byte("Welcome to Paul's Go webservice: \n \n"))
 
 	if r.URL.Path == "/users" {
 		switch r.Method {
