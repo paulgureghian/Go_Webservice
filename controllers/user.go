@@ -15,6 +15,8 @@ type userController struct {
 
 func (uc userController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
+	w.Write([]byte("Welcome to Paul's Go webservice"))
+
 	if r.URL.Path == "/users" {
 		switch r.Method {
 		case http.MethodGet:
@@ -74,7 +76,7 @@ func (uc *userController) post(w http.ResponseWriter, r *http.Request) {
 	u, err := uc.parseRequest(r)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("Could not parse User object"))
+		w.Write([]byte("Could not parse User object - post method"))
 		return
 	}
 
@@ -91,7 +93,7 @@ func (uc *userController) put(id int, w http.ResponseWriter, r *http.Request) {
 	u, err := uc.parseRequest(r)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("Could not parse User object"))
+		w.Write([]byte("Could not parse User object - put method"))
 		return
 	}
 
