@@ -66,7 +66,7 @@ func (uc *userController) get(id int, w http.ResponseWriter) {
 	u, err := models.GetUserByID(id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("Could not parse User object - get method"))
+		w.Write([]byte("Could not parse User object - get method \n"))
 		return
 	}
 	encodeResponseAsJSON(u, w)
@@ -77,7 +77,7 @@ func (uc *userController) post(w http.ResponseWriter, r *http.Request) {
 	u, err := uc.parseRequest(r)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("Could not parse User object - post method"))
+		w.Write([]byte("Could not parse User object - post method \n"))
 		return
 	}
 
@@ -94,7 +94,7 @@ func (uc *userController) put(id int, w http.ResponseWriter, r *http.Request) {
 	u, err := uc.parseRequest(r)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("Could not parse User object - put method"))
+		w.Write([]byte("Could not parse User object - put method \n"))
 		return
 	}
 
@@ -118,7 +118,7 @@ func (uc *userController) delete(id int, w http.ResponseWriter) {
 	err := models.RemoveUserByID(id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("Could not parse User object - delete method"))
+		w.Write([]byte("Could not parse User object - delete method \n"))
 		//w.Write([]byte(err.Error()))
 		return
 	}
