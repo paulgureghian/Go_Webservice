@@ -15,8 +15,6 @@ type userController struct {
 
 func (uc userController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
-	w.Write([]byte("Welcome to Paul's Go webservice: \n \n"))
-
 	if r.URL.Path == "/users" {
 		switch r.Method {
 		case http.MethodGet:
@@ -28,6 +26,7 @@ func (uc userController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		default:
 			w.WriteHeader(http.StatusNotImplemented)
 		}
+
 	} else {
 		matches := uc.userIDPattern.FindStringSubmatch(r.URL.Path)
 		if len(matches) == 0 {
@@ -53,6 +52,7 @@ func (uc userController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	w.Write([]byte("Welcome to Paul's Go webservice: \n \n"))
 }
 
 func (uc *userController) getAll(w http.ResponseWriter, r *http.Request) {
@@ -66,6 +66,7 @@ func (uc *userController) get(id int, w http.ResponseWriter) {
 	u, err := models.GetUserByID(id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Could not parse User object - get method"))
 		return
 	}
 	encodeResponseAsJSON(u, w)
@@ -117,7 +118,8 @@ func (uc *userController) delete(id int, w http.ResponseWriter) {
 	err := models.RemoveUserByID(id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		w.Write([]byte("Could not parse User object - delete method"))
+		//w.Write([]byte(err.Error()))
 		return
 	}
 
