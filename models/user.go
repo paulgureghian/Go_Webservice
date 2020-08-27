@@ -74,5 +74,5 @@ func RemoveUserByID(id int) error {
 		}
 	}
 
-	return fmt.Errorf("User with ID '%v' not found", id)
+	return fmt.Errorf("User with ID '%v' not found \n", id)
 }
