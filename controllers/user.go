@@ -119,7 +119,7 @@ func (uc *userController) delete(id int, w http.ResponseWriter) {
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte("Could not parse User object - delete method \n"))
-		//w.Write([]byte(err.Error()))
+		w.Write([]byte(err.Error()))
 		return
 	}
 
